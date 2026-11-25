@@ -59,4 +59,5 @@ dependencies {
     implementation("androidx.camera:camera-lifecycle:1.3.4")
     implementation("androidx.camera:camera-video:1.3.4")
     implementation("androidx.camera:camera-view:1.3.4")
+    implementation("androidx.compose.material:material-icons-core")
 }
