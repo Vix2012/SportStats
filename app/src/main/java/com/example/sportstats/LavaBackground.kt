@@ -38,11 +38,11 @@ fun LavaBackground(
 ) {
     val blobs = remember {
         listOf(
-            Blob(Color(0xFF4CAF50), 0.55f, 1f, 2f, 0.0f, 0.5f),
-            Blob(Color(0xFFFFEB3B), 0.50f, 2f, 1f, 1.5f, 3.0f),
-            Blob(Color(0xFFFF9800), 0.60f, 1f, 1f, 3.0f, 1.0f),
-            Blob(Color(0xFFFF5722), 0.45f, 2f, 3f, 4.5f, 2.0f),
-            Blob(Color(0xFFFFFFFF), 0.50f, 3f, 2f, 2.0f, 5.0f)
+            Blob(Color(0xFFD9622B), 0.60f, 1f, 2f, 0.0f, 0.5f), // terre battue
+            Blob(Color(0xFFE8814A), 0.50f, 2f, 1f, 1.5f, 3.0f), // terre battue claire
+            Blob(Color(0xFF1F7A50), 0.60f, 1f, 1f, 3.0f, 1.0f), // vert court
+            Blob(Color(0xFFB8471F), 0.45f, 2f, 3f, 4.5f, 2.0f), // brique foncée
+            Blob(Color(0xFFF3E9D8), 0.35f, 3f, 2f, 2.0f, 5.0f)  // crème (lignes du court)
         )
     }
 
@@ -58,7 +58,7 @@ fun LavaBackground(
         label = "time"
     )
 
-    Box(modifier = modifier.fillMaxSize().background(Color(0xFF12002B))) {
+    Box(modifier = modifier.fillMaxSize().background(Color(0xFF0A2E22))) {
         Canvas(modifier = Modifier.fillMaxSize()) {
             blobs.forEach { b ->
                 val cx = size.width * (0.5f + 0.38f * sin(time * b.speedX + b.phaseX))
