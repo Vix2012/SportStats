@@ -52,13 +52,13 @@ fun LavaBackground(
         initialValue = 0f,
         targetValue = (2 * PI).toFloat(),
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 40000, easing = LinearEasing),
+            animation = tween(durationMillis = 100000, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
         ),
         label = "time"
     )
 
-    Box(modifier = modifier.fillMaxSize().background(Color(0xFF0A2E22))) {
+    Box(modifier = modifier.fillMaxSize().background(Color(0xFF55856C))) {
         Canvas(modifier = Modifier.fillMaxSize()) {
             blobs.forEach { b ->
                 val cx = size.width * (0.5f + 0.38f * sin(time * b.speedX + b.phaseX))
