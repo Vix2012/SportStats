@@ -91,10 +91,13 @@ class AnalysisService : Service() {
                         etat.message = "Téléphone trop chaud, pause..."
                         majProgres("Téléphone trop chaud, pause...", trouves.size, i)
                     }
-                    val texte = "Analyse de l'échange ${i + 1}/${trouves.size}"
+                    val branche = PowerGuard.enCharge(this)
+                    val texte = "Analyse de l'échange ${i + 1}/${trouves.size}" +
+                            if (branche) " (branché, rapide)" else " (sur batterie, économe)"
                     etat.message = "$texte..."
                     majProgres(texte, trouves.size, i)
-                    tout.addAll(analyzer.analyze(uri, echange.startMs, echange.endMs))
+                    val pas = if (branche) 50L else 100L
+                    tout.addAll(analyzer.analyze(uri, echange.startMs, echange.endMs, pas))
                 }
 
                 etat.videoUri = uri

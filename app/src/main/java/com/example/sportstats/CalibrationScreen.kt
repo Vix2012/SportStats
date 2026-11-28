@@ -28,14 +28,15 @@ import kotlinx.coroutines.withContext
 
 @Composable
 fun CalibrationScreen(
-    videoUri: Uri,
+    videoUri: Uri? = null,
+    bitmapInitial: Bitmap? = null,
     onFini: (List<Offset>?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    var image by remember { mutableStateOf<Bitmap?>(null) }
+    var image by remember { mutableStateOf<Bitmap?>(bitmapInitial) }
     var taille by remember { mutableStateOf(IntSize.Zero) }
     var enCours by remember { mutableStateOf(false) }
     var info by remember { mutableStateOf("Touche le sol du terrain pour le détecter.") }
@@ -44,10 +45,11 @@ fun CalibrationScreen(
 
     // On prend une image de la vidéo, vers la première seconde
     LaunchedEffect(videoUri) {
+        val adresse = videoUri ?: return@LaunchedEffect
         image = withContext(Dispatchers.IO) {
             val lecteur = MediaMetadataRetriever()
             try {
-                lecteur.setDataSource(context, videoUri)
+                lecteur.setDataSource(context, adresse)
                 lecteur.getFrameAtTime(1_000_000, MediaMetadataRetriever.OPTION_CLOSEST)
                     ?: lecteur.getFrameAtTime(0)
             } finally {
